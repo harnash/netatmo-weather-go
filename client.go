@@ -267,11 +267,11 @@ func (c *Client) GetStationsData() ([]Device, *User, error) {
 
 // GetMeasureByTimeRange gathers measure data by specified time window.
 // Reference: https://dev.netatmo.com/apidocumentation/weather#getmeasure
-func (c *Client) GetMeasureByTimeRange(deviceID, moduleID string, begin, end int64) ([]Measure, error) {
+func (c *Client) GetMeasureByTimeRange(deviceID, moduleID, scale string, begin, end int64) ([]Measure, error) {
 	resp, err := c.client.Get("https://api.netatmo.com/api/getmeasure" +
 		"?device_id=" + deviceID +
 		"&module_id=" + moduleID +
-		"&scale=max" + // {max, 30min, 1hour, 3hours, 1day, 1week, 1month}
+		"&scale=" + scale + // {max, 30min, 1hour, 3hours, 1day, 1week, 1month}
 		"&type=" + strings.Join(TargetMeasurements, ",") +
 		"&real_time=true" + // default: false
 		"&date_begin=" + strconv.FormatInt(begin, 10) +

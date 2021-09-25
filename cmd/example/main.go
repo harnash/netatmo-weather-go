@@ -54,7 +54,7 @@ func stations(client *netatmo.Client) {
 func measureRange(client *netatmo.Client, device, module string, minutes int) {
 	end := time.Now().UTC()
 	begin := end.Add(-time.Duration(minutes) * time.Minute)
-	values, err := client.GetMeasureByTimeRange(device, module, begin.Unix(), end.Unix())
+	values, err := client.GetMeasureByTimeRange(device, module, "max", begin.Unix(), end.Unix())
 	if err != nil {
 		panic(err)
 	}
